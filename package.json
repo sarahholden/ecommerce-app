@@ -1,0 +1,19 @@
+{
+  "name": "ecommerce-app",
+  "version": "1.0.0",
+  "description": "E-commerce app demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sarahholden/ecommerce-app.git"
+  },
+  "author": "Sarah Holden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarahholden/ecommerce-app/issues"
+  },
+  "homepage": "https://github.com/sarahholden/ecommerce-app#readme"
+}
