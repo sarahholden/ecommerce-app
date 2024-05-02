@@ -32,4 +32,17 @@ module.exports = class ProductService {
       throw createError(500, err);
     }
   }
+
+  async remove(id) {
+    try {
+      const product = await ProductModelInstance.findOneById(id);
+      if (!product) {
+        throw createError(404, "Not Found");
+      }
+      const response = await ProductModelInstance.deleteById(id);
+      return response;
+    } catch (err) {
+      throw createError(500, err);
+    }
+  }
 };

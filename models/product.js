@@ -91,4 +91,20 @@ module.exports = class ProductModel {
       throw new Error(err);
     }
   }
+
+  async deleteById(id) {
+    try {
+      const statement = `DELETE FROM products WHERE id = $1 RETURNING *`;
+      const values = [id];
+      const result = await db.query(statement, values);
+
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
+
+      return null;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 };
