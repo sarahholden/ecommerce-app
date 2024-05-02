@@ -21,8 +21,10 @@ module.exports = (app) => {
   passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
-        // TODO: GET USER
-        const user = null;
+        const user = await AuthServiceInstance.login({
+          email: username,
+          password,
+        });
         return done(null, user);
       } catch (err) {
         done(err);

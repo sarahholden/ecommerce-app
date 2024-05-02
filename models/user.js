@@ -76,12 +76,12 @@ module.exports = class UserModel {
    */
   async findOneById(id) {
     try {
-      const statement = `SELECT * 
-                        FROM users
-                        WHERE id = $1`;
+      const statement = `SELECT * FROM users WHERE id = $1`;
       const values = [id];
 
-      const result = db.query(statement, values);
+      console.log(statement);
+
+      const result = await db.query(statement, values);
 
       if (result.rows?.length) {
         return result.rows[0];
