@@ -1,6 +1,9 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
+// const AuthService = require("../services/AuthService");
+// const AuthServiceInstance = new AuthService();
+
 module.exports = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
