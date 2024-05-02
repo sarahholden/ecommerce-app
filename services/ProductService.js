@@ -14,4 +14,13 @@ module.exports = class ProductService {
       throw createError(500, err);
     }
   }
+
+  async list(options) {
+    try {
+      const products = await ProductModelInstance.find(options);
+      return products;
+    } catch (err) {
+      throw createError(500, err);
+    }
+  }
 };

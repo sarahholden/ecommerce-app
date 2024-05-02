@@ -58,7 +58,6 @@ module.exports = class ProductModel {
   async find(options = {}) {
     try {
       const statement = `SELECT * FROM products`;
-
       const result = await db.query(statement);
 
       if (result.rows?.length) {

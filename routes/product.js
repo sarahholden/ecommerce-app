@@ -8,6 +8,16 @@ module.exports = (app) => {
   app.use("/products", router);
 
   // GET all products
+  router.get("/", async (req, res, next) => {
+    try {
+      const queryParams = req.query;
+
+      const response = await ProductServiceInstance.list(queryParams);
+      res.status(200).send(response);
+    } catch (err) {
+      next(err);
+    }
+  });
 
   // POST create a new product
   router.post("/", async (req, res, next) => {
