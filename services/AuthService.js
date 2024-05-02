@@ -5,16 +5,19 @@ const UserModelInstance = new UserModel();
 module.exports = class AuthService {
   async register(data) {
     const { email } = data;
-    try {
-      const user = UserModelInstance.findOneByEmail(email);
 
+    try {
+      // Check if user already exists
+      const user = await UserModelInstance.findOneByEmail(email);
+
+      // If user already exists, reject
       if (user) {
-        throw CreateError(409, "Email already in use");
+        throw createError(409, "Email already in use");
       }
 
-      // TODO: Hash and salt pw using bcrypt
+      // User doesn't exist, create new user record
       return await UserModelInstance.create(data);
-    } catch (error) {
+    } catch (err) {
       throw createError(500, err);
     }
   }
@@ -23,15 +26,21 @@ module.exports = class AuthService {
     const { email, password } = data;
 
     try {
+      // Check if user exists
       const user = await UserModelInstance.findOneByEmail(email);
-      if (user) {
-        throw CreateError(401, "Incorrect username or password");
+
+      // If no user found, reject
+      if (!user) {
+        throw createError(401, "Incorrect username or password");
       }
 
+      // Check for matching passwords
       if (user.password !== password) {
-        throw CreateError(401, "Incorrect username or password");
+        throw createError(401, "Incorrect username or password");
       }
-    } catch (error) {
+
+      return user;
+    } catch (err) {
       throw createError(500, err);
     }
   }
