@@ -69,4 +69,26 @@ module.exports = class ProductModel {
       throw new Error(err);
     }
   }
+
+  /**
+   * Retrieve product by ID
+   * @param  {Object}      id [Product ID]
+   * @return {Object|null}    [Product record]
+   */
+
+  async findOneById(id) {
+    try {
+      const statement = `SELECT * FROM products WHERE id = $1`;
+      const values = [id];
+      const result = await db.query(statement, values);
+
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
+
+      return null;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 };

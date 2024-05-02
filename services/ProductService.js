@@ -23,4 +23,13 @@ module.exports = class ProductService {
       throw createError(500, err);
     }
   }
+
+  async get(id) {
+    try {
+      const product = await ProductModelInstance.findOneById(id);
+      return product;
+    } catch (err) {
+      throw createError(500, err);
+    }
+  }
 };

@@ -35,4 +35,16 @@ module.exports = (app) => {
   // UPDATE a product (by id)
 
   // get a product by product id
+  router.get("/:productId", async (req, res, next) => {
+    try {
+      const { productId } = req.params;
+      const response = await ProductServiceInstance.get(productId);
+      if (!response) {
+        res.status(404).send("Product not found!");
+      }
+      res.status(200).send(response);
+    } catch (err) {
+      next(err);
+    }
+  });
 };
