@@ -56,4 +56,18 @@ module.exports = (app) => {
   });
 
   // UPDATE a product (by id)
+  router.put("/:productId", async (req, res, next) => {
+    try {
+      const { productId } = req.params;
+      const data = req.body;
+
+      const response = await ProductServiceInstance.update({
+        id: productId,
+        ...data,
+      });
+      res.status(200).send(response);
+    } catch (err) {
+      next(err);
+    }
+  });
 };
