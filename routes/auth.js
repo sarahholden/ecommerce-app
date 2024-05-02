@@ -39,4 +39,9 @@ module.exports = (app, passport) => {
       }
     }
   );
+
+  router.get("/logout", (req, res, next) => {
+    req.logout();
+    res.redirect("/");
+  });
 };
