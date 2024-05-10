@@ -19,8 +19,10 @@ module.exports = class CartModel {
     try {
       const data = { userId, ...this };
 
+      // Generate SQL statement - using helper for dynamic parameter injection
       const statement = pgp.helpers.insert(data, null, "carts") + "RETURNING *";
 
+      // Execute SQL statment
       const result = await db.query(statement);
 
       if (result.rows?.length) {
